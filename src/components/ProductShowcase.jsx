@@ -7,8 +7,20 @@ import SectionHeader from "@/components/SectionHeader";
 
 const ICONS = [Brain, Target, ShieldCheck, Eye, BookOpen, Phone, BarChart3];
 
+// Map product index → video file (null = show placeholder animation)
+const PRODUCT_VIDEOS = [
+  "/coach-maestro.mp4",          // 0 Master Coach
+  "/simulador-de-practica.mp4",  // 1 Practice Simulator
+  null,                          // 2 Expert Certificator
+  "/coach-no-verbal.mp4",        // 3 Non-Verbal Coach
+  null,                          // 4 Second Brain
+  null,                          // 5 CallMentorAI
+  null,                          // 6 Rolplay Analytics
+];
+
 function ProductCard({ product, index, total }) {
   const Icon = ICONS[index] || Brain;
+  const videoSrc = PRODUCT_VIDEOS[index] ?? null;
 
   return (
     <motion.div
@@ -18,35 +30,50 @@ function ProductCard({ product, index, total }) {
       transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
       data-testid={`product-card-${index}`}
       className={
-        // Center last card when total is odd
         total % 2 !== 0 && index === total - 1
           ? "md:col-start-2 lg:col-start-auto"
           : ""
       }
     >
       <GlassCard className="p-6 group cursor-pointer h-full hover:border-[#C0392B]/30 transition-all duration-500">
-        <div className="aspect-[4/3] rounded-xl relative overflow-hidden mb-6 grid-overlay border border-white/5">
-          <NeuralNetwork className="opacity-40" density={0.0002} />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0E]/40 via-transparent to-[#0A0A0E]/80" />
+        <div className="aspect-[4/3] rounded-xl relative overflow-hidden mb-6 border border-white/5">
 
-          {/* Play button */}
-          <div className="absolute inset-0 grid place-items-center">
-            <motion.div
-              whileHover={{ scale: 1.15 }}
-              className="w-12 h-12 rounded-full bg-[#C0392B]/90 grid place-items-center shadow-[0_0_24px_rgba(192,57,43,0.6)]"
-            >
-              <Play size={15} fill="white" className="ml-0.5" />
-            </motion.div>
-          </div>
+          {videoSrc ? (
+            /* ── Real video ── */
+            <video
+              src={videoSrc}
+              className="w-full h-full object-cover"
+              muted
+              playsInline
+              loop
+              preload="none"
+              onMouseEnter={(e) => e.currentTarget.play()}
+              onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
+            />
+          ) : (
+            /* ── Placeholder animation ── */
+            <>
+              <NeuralNetwork className="opacity-40" density={0.0002} />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0E]/40 via-transparent to-[#0A0A0E]/80" />
+              <div className="absolute inset-0 grid place-items-center">
+                <motion.div
+                  whileHover={{ scale: 1.15 }}
+                  className="w-12 h-12 rounded-full bg-[#C0392B]/90 grid place-items-center shadow-[0_0_24px_rgba(192,57,43,0.6)]"
+                >
+                  <Play size={15} fill="white" className="ml-0.5" />
+                </motion.div>
+              </div>
+            </>
+          )}
 
-          {/* Tag */}
-          <div className="absolute top-3 left-3 flex items-center gap-1.5 glass rounded-full px-2.5 py-1">
+          {/* Tag — always visible */}
+          <div className="absolute top-3 left-3 flex items-center gap-1.5 glass rounded-full px-2.5 py-1 z-10">
             <Icon size={10} className="text-[#C0392B]" />
             <span className="font-mono text-[9px] tracking-[0.2em] text-white/80">{product.tag}</span>
           </div>
 
-          {/* Bullet pills */}
-          <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5">
+          {/* Bullet pills — always visible */}
+          <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5 z-10">
             {product.bullets.map((b) => (
               <span
                 key={b}
