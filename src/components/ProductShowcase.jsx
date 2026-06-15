@@ -43,12 +43,9 @@ function ProductCard({ product, index, total }) {
             <video
               src={videoSrc}
               className="w-full h-full object-cover"
-              muted
+              controls
               playsInline
-              loop
-              preload="none"
-              onMouseEnter={(e) => e.currentTarget.play()}
-              onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
+              preload="metadata"
             />
           ) : (
             /* ── Placeholder animation ── */
