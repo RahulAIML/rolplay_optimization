@@ -149,7 +149,7 @@
     "highlight": "compound",
     "body": "Real performance gains, measured and proven across every client engagement.",
     "stats": [
-      { "value": 5, "prefix": "+", "suffix": "%", "label": "Average Revenue Increase" },
+      { "value": 17, "prefix": "", "suffix": "%", "label": "Annual Growth Rate with Sales Coaching" },
       { "value": 60, "prefix": "-", "suffix": "%", "label": "Training Cost Reduction" },
       { "value": 40, "prefix": "-", "suffix": "%", "label": "Less Preparation Time" },
       { "value": 24, "prefix": "", "suffix": "/7", "label": "Coaching Available for Your Team" }

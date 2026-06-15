@@ -149,7 +149,7 @@
     "highlight": "escalan",
     "body": "Ganancias de rendimiento reales, medidas y probadas en cada compromiso con clientes.",
     "stats": [
-      { "value": 5, "prefix": "+", "suffix": "%", "label": "Aumento Promedio en Ingresos" },
+      { "value": 17, "prefix": "", "suffix": "%", "label": "Tasa de Crecimiento Anual con Coaching de Ventas" },
       { "value": 60, "prefix": "-", "suffix": "%", "label": "Reducción en Costos de Capacitación" },
       { "value": 40, "prefix": "-", "suffix": "%", "label": "Menor Tiempo de Preparación" },
       { "value": 24, "prefix": "", "suffix": "/7", "label": "Coaching Disponible para Todo el Equipo" }
